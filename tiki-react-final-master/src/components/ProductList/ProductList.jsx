@@ -1,43 +1,43 @@
 import './style.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useState, useEffect } from 'react';
-import data from 'C:/Users/Admin/Downloads/tiki-react-final-master/tiki-react-final-master/data.json';
+import data from '../../../data.json';
 
-
-function ProductList({ searchTerm }) {
+function ProductList({ searchTerm, filter, selectedSellers, selectedRating }) {
     const [productList, setProductList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(10); // Số lượng sản phẩm trên mỗi trang
+    const [productsPerPage] = useState(10);
 
     useEffect(() => {
         setProductList(data.books);
-    }, []); 
+        console.log('Product list loaded:', data.books);
+    }, []);
 
-    // Lọc danh sách sản phẩm dựa trên giá trị nhập vào từ ô tìm kiếm
-    const filteredProducts = productList.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    
+    const filteredProducts = productList.filter(product => {
+        const isNameMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const isCategoryMatch = filter ? (product.categories && product.categories.name.toLowerCase() === filter.toLowerCase()) : true;
+        const isSellerMatch = selectedSellers.length > 0 ? selectedSellers.includes(product.current_seller.name) : true;
+        const isRatingMatch = selectedRating.min <= product.rating_average && product.rating_average < selectedRating.max;
 
-    // Tính chỉ mục bắt đầu và chỉ mục kết thúc của sản phẩm trên trang hiện tại
+        return isNameMatch && isCategoryMatch && isSellerMatch && isRatingMatch;
+    });
+
+    console.log('Filtered products:', filteredProducts);
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-    // Hàm chuyển trang
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    console.log('Current products:', currentProducts);
 
-    // Hàm chuyển đến trang trước
-    const goToPrevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredProducts.length / productsPerPage); i++) {
+        pageNumbers.push(i);
+    }
 
-    // Hàm chuyển đến trang tiếp theo
-    const goToNextPage = () => {
-        if (currentPage < Math.ceil(filteredProducts.length / productsPerPage)) {
-            setCurrentPage(currentPage + 1);
-        }
+    const goToPage = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
     return (
@@ -51,21 +51,18 @@ function ProductList({ searchTerm }) {
                 
                 <div className="pagination hideMb hideSm">
                     <ul className="product-list__pagination hideMb hideMd hideSm">
-                        <li className="pagination-item">
-                            <a href="#" className="pagination-item__link" onClick={goToPrevPage}>
-                                <i className="pagination-item__icon fa-solid fa-angle-left"></i>
-                            </a>
-                        </li>
-                        <li className="pagination-item">
-                            <a href="#" className="pagination-item__link" onClick={goToNextPage}>
-                                <i className="pagination-item__icon fa-solid fa-angle-right"></i>
-                            </a>
-                        </li>
+                        {pageNumbers.map(number => (
+                            <li key={number} className="pagination-item">
+                                <a href="#" className={number === currentPage ? "pagination-item__link active" : "pagination-item__link"} onClick={() => goToPage(number)}>
+                                    {number}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default ProductList;

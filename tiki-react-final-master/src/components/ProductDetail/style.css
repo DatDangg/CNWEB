@@ -81,6 +81,32 @@
     line-height: 1.4;
 }
 
+.special-features-more{
+    border-radius: 8px;
+    background-color: #FFF;
+}
+
+.special-features-more-img{
+    width: 24px;
+    height: 24px;
+}
+
+.special-features-more-text-gray{
+    color: #808089;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.special-features-more-text{
+    color: #27272A;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
 .product-detail__left-image-second.active {
     border: 2px solid  var(--primary-color);
     border-radius: 4px;

@@ -14,12 +14,12 @@ function Header({ onSearch }) {
   };
 
   return (
-    <div>
+    <div className="header">
       <div className="header-desktop" id="header">
         <div className="flex items-center py-2 pb-3 mb-2 row container-fluid">
           <div className="header__logo mr-4">
             <a href="/">
-              <img src="../logo.png" alt="" className="header__logo-img" />
+              <img src="../img/logo.png" alt="" className="header__logo-img" />
             </a>
           </div>
           <div className="header__search flex items-center border-2 rounded-md mx-4">
@@ -61,14 +61,15 @@ function Header({ onSearch }) {
                 <path d="M8 21H10" stroke="#4169E1" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M16 21H18" stroke="#4169E1" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              {/* <span className="header__cart-notice flex items-center justify-center">0</span> */}
             </div>
           </div>
         </div>
       </div>
       <div className="header-mobile d-block bg-primary d-lg-none" id="header-mobile">
         <header className="header-container">
-          <img className="button-SVG" alt="Button SVG" src="/img/button-svg.svg" />
+          <a href="/">
+            <img className="button-SVG" alt="Button SVG" src="/img/button-svg.svg" />
+          </a>
           <div className="button-hamburger">
             <div className="span" />
             <div className="span" />
@@ -82,24 +83,24 @@ function Header({ onSearch }) {
         </header>
         <nav className="navbar">
           <div className="navbar-items">
-            <div className="text">Phổ biến</div>
+            <a href="#" className="text">Phổ biến</a>
             <div className="dot" />
-            <div className="text">Bán chạy</div>
+            <a href="#" className="text">Bán chạy</a>
             <div className="dot" />
-            <div className="text">Hàng mới</div>
+            <a href="#" className="text">Hàng mới</a>
             <div className="dot" />
-            <div className="text">Giá</div>
+            <a href="#" className="text">Giá</a>
             <img className="SVG" alt="Svg" src="/img/svg-85.svg" />
           </div>
           <div className="horizontal-divide" />
           <div className="filter-now-container">
             <div className="filter-icon">
-              <img src="../img/svg-86.svg" alt="Filter Icon" />
+              <img className="filter" src="../img/svg-86.svg" alt="Filter Icon" />
               <div className="text">Lọc</div>
             </div>
             <div className="horizontal-divider" />
             <div className="sticky-filter">
-              <img src="../img/802e2c99dcce64c67aa2648edb15dd25-png-12.png" alt="Now Icon" />
+              <img className="now" src="../img/802e2c99dcce64c67aa2648edb15dd25-png-12.png" alt="Now Icon" />
             </div>
           </div>
         </nav>

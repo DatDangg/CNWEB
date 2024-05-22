@@ -4,13 +4,28 @@ function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+function renderStarRating(rating) {
+    const numFullStars = Math.floor(rating);
+    const lastStarPercentage = (rating - numFullStars) * 100;
+
+    return (
+        <>
+            {[...Array(numFullStars).keys()].map(index => (
+                <i key={index} className="fa-solid fa-star star-gold"></i>
+            ))}
+            {lastStarPercentage > 0 && (
+                <i className="fa-solid fa-star star-gold" style={{ clipPath: `inset(0 ${(100 - lastStarPercentage)}% 0 0)` }}></i>
+            )}
+        </>
+    );
+}
+
 function ProductItem({ product }) {
-    const { name, rating_average, list_price, delivery } = product;
+    const { name, rating_average} = product;
     const base_url = product.images[0]?.base_url;
     const quantitySoldText = product.quantity_sold?.text;
     const name_categorie = product.categories?.name;
-    const discount = Math.floor(Math.random() * 100) + 1;
-    const link = product.current_seller.link;
+    const discount = parseInt((1-(product.current_seller?.price / product.original_price)) *100,10);
 
     return (
         <>
@@ -21,16 +36,18 @@ function ProductItem({ product }) {
                         <h3 className="item-product-name">{name}</h3>
                         <div className="rate-and-sold flex justify-start items-baseline">
                             <div className="item-product-rating">
-                                {[...Array(5).keys()].map(index => (
-                                    <i key={index} className={`fa-solid fa-star ${index < rating_average ? 'star-gold' : 'star-gray'}`}></i>
-                                ))}
+                                {renderStarRating(rating_average)}
                             </div>
                             <div className="item-product-sold">{quantitySoldText}</div>
                         </div>
                     </div>
                     <div className="item-product-price py-2 mt-2">
-                        <span className="item-product-price-current">{formatPrice(list_price)}<sup>đ</sup></span>
-                        <span className="item-product-price-discount">-{discount}%</span>
+                        <span className="item-product-price-current">
+                            {product && product.original_price ? formatPrice(product.original_price) : '0' }<sup>đ</sup>
+                        </span>
+                        {discount !== 0 && (
+                            <span className="item-product-price-discount">-{discount}%</span>
+                        )}
                     </div>
                     <div className="item-product-categories text-center mt-6 pt-2">{name_categorie}</div>
                 </a>
@@ -40,3 +57,5 @@ function ProductItem({ product }) {
 }
 
 export default ProductItem;
+
+

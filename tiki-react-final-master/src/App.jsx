@@ -1,32 +1,51 @@
-import { useEffect, useState } from 'react'
-import { Route, BrowserRouter} from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import './index.css'
-import Header from './components/Header/Header'
-import Aside from './components/Aside/Aside'
-import ProductList from './components/ProductList/ProductList'
-import Footer from './components/Footer/Footer'
-import ListProdDetail from './components/ListProdDetail/ListProdDetail'
+import { useEffect, useState } from 'react';
+import { Route, BrowserRouter } from 'react-router-dom';
+import reactLogo from './assets/react.svg';
+import './App.css';
+import './index.css';
+import Header from './components/Header/Header';
+import Aside from './components/Aside/Aside';
+import ProductList from './components/ProductList/ProductList';
+import Footer from './components/Footer/Footer';
+import ListProdDetail from './components/ListProdDetail/ListProdDetail';
 
 function App() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filter, setFilter] = useState('');
+    const [selectedSellers, setSelectedSellers] = useState([]);
+    const [selectedRating, setSelectedRating] = useState({ min: 0, max: 6});
 
-  const [searchTerm, setSearchTerm] = useState('');
+    const handleRatingChange = (minRating, maxRating) => {
+      setSelectedRating({ min: minRating, max: maxRating });
+      // console.log(minRating, maxRating);
+    };
 
-  const handleSearch = (term) => {
-      setSearchTerm(term);
-  };
 
-  return (
-    <BrowserRouter>
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+    };
+
+    const handleFilterChange = (newFilter) => {
+        setFilter(newFilter);
+        // console.log(newFilter);
+    };
+
+    const handleSellerChange = (sellers) => {
+        setSelectedSellers(sellers);
+        // console.log(sellers);
+    };
+
+
+    return (
+        <BrowserRouter>
         <Route exact path="/">
           <div className="app">
-            <Header onSearch={handleSearch}/>
-              <div className="contaniner flex">
-                <Aside />
-                <ProductList searchTerm={searchTerm}/>
-              </div>
-            <Footer/>
+          <Header onSearch={handleSearch} />
+            <div className="flex justify-between">
+                <Aside onFilterChange={handleFilterChange} onSellerChange={handleSellerChange} onRatingChange={handleRatingChange} />
+                <ProductList searchTerm={searchTerm} filter={filter} selectedSellers={selectedSellers} selectedRating={selectedRating} />
+            </div>
+            <Footer />
           </div>
         </Route>
 
@@ -36,7 +55,7 @@ function App() {
           </div>
         </Route>
     </BrowserRouter>
-  )
+    );
 }
 
-export default App
+export default App;

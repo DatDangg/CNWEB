@@ -51,9 +51,9 @@ function Footer() {
                     <div className="col l-2-4 m-6 c-12">
                         <h3 className="footer__heading">Kết nối với chúng tôi</h3>
                         <div class="contact">
-                            <a href="#"><img src="../fb.jpg" alt="" className="footer__heading--transport-img" /></a>
-                            <a href="#"><img src="../yt.jpg" alt="" className="footer__heading--transport-img" /></a>
-                            <a href="#"><img src="../zalo.jpg" alt="" className="footer__heading--transport-img" /></a>
+                            <a href="#"><img src="../img/fb.jpg" alt="" className="footer__heading--transport-img" /></a>
+                            <a href="#"><img src="../img/yt.jpg" alt="" className="footer__heading--transport-img" /></a>
+                            <a href="#"><img src="../img/zalo.jpg" alt="" className="footer__heading--transport-img" /></a>
                         </div>
                         <br />
                         <h3 className="footer__heading">Tải ứng dụng trên điện thoại</h3>
