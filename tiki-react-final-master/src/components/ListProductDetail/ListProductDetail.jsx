@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import data from '../../../data.json';
 
 
-function ListProdDetail() {
+function ListProductDetail() {
     const [productDetail, setProductDetail] = useState({});
     const { id } = useParams();
 
@@ -18,4 +18,4 @@ function ListProdDetail() {
     );
 }
 
-export default ListProdDetail;
+export default ListProductDetail;

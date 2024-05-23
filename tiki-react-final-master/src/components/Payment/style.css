@@ -15,7 +15,7 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 600px;
+    width: 1000px;
     text-align: center;
     position: relative;
 }
@@ -42,7 +42,7 @@
 }
 
 .book-table {
-    width: 100%;
+    width: 700px;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -79,3 +79,4 @@
     width: 150px;
     height: 150px;
 }
+

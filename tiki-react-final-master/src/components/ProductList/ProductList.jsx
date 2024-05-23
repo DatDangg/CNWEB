@@ -10,7 +10,7 @@ function ProductList({ searchTerm, filter, selectedSellers, selectedRating }) {
 
     useEffect(() => {
         setProductList(data.books);
-        console.log('Product list loaded:', data.books);
+        // console.log('Product list:', data.books);
     }, []);
 
     
@@ -23,13 +23,13 @@ function ProductList({ searchTerm, filter, selectedSellers, selectedRating }) {
         return isNameMatch && isCategoryMatch && isSellerMatch && isRatingMatch;
     });
 
-    console.log('Filtered products:', filteredProducts);
+    // console.log('Filtered products:', filteredProducts);
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-    console.log('Current products:', currentProducts);
+    // console.log('Current products:', currentProducts);
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredProducts.length / productsPerPage); i++) {
@@ -49,13 +49,13 @@ function ProductList({ searchTerm, filter, selectedSellers, selectedRating }) {
                     ))}
                 </div>
                 
-                <div className="pagination hideMb hideSm">
+                <div className="pagination">
                     <ul className="product-list__pagination hideMb hideMd hideSm">
                         {pageNumbers.map(number => (
                             <li key={number} className="pagination-item">
-                                <a href="#" className={number === currentPage ? "pagination-item__link active" : "pagination-item__link"} onClick={() => goToPage(number)}>
+                                <button className={number === currentPage ? "pagination-item__link active" : "pagination-item__link"} onClick={() => goToPage(number)}>
                                     {number}
-                                </a>
+                                </button>
                             </li>
                         ))}
                     </ul>

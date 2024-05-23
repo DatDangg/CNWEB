@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
 import './App.css';
 import './index.css';
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import ProductList from './components/ProductList/ProductList';
 import Footer from './components/Footer/Footer';
-import ListProdDetail from './components/ListProdDetail/ListProdDetail';
+import ListProductDetail from './components/ListProductDetail/ListProductDetail';
 
 function App() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +36,7 @@ function App() {
 
 
     return (
-        <BrowserRouter>
+      <BrowserRouter>
         <Route exact path="/">
           <div className="app">
           <Header onSearch={handleSearch} />
@@ -51,10 +50,10 @@ function App() {
 
         <Route path="/:id">
           <div className="app">
-            <ListProdDetail/>
+            <ListProductDetail/>
           </div>
         </Route>
-    </BrowserRouter>
+      </BrowserRouter>
     );
 }
 

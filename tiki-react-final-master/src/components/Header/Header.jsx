@@ -29,13 +29,7 @@ function Header({ onSearch }) {
                   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
               </button>
-              <input
-                type="text"
-                placeholder="Freeship giảm đến 30k"
-                className="header__search-input mx-4"
-                onChange={handleInputChange}
-                value={searchTerm}
-              />
+              <input type="text" placeholder="Freeship giảm đến 30k" className="header__search-input mx-4" onChange={handleInputChange} />
               <button className="header__search-btn" type="submit">
                 Tìm kiếm
               </button>

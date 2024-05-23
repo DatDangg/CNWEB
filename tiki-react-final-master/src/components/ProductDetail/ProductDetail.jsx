@@ -2,7 +2,7 @@ import './style.css';
 import { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Payment from '../Payment/Payment'; // Import the Payment component
+import Payment from '../Payment/Payment'; 
 
 function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -31,7 +31,7 @@ function ProductDetail({product}) {
     const [unitPrice, setUnitPrice] = useState(0);
     const [listImage, setListImage] = useState([]);
     const [totalCost, setTotalCost] = useState([]);
-    const [showPayment, setShowPayment] = useState(false); // State to manage Payment component visibility
+    const [showPayment, setShowPayment] = useState(false); 
 
     const currentPrice = product.current_seller ? product.current_seller.price : 0;
     const discount = product.original_price ? parseInt((1 - (currentPrice / product.original_price)) * 100, 10) : 0;
@@ -210,7 +210,7 @@ function ProductDetail({product}) {
                     </div>
                 </div>
             </div>
-            {showPayment && <Payment product={product} quantity={quantity} onClose={handleClosePayment} />} {/* Display Payment component */}
+            {showPayment && <Payment product={product} quantity={quantity} onClose={handleClosePayment} />} 
             <Footer />                                       
         </>
     )
